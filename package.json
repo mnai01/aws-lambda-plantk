@@ -1,0 +1,19 @@
+{
+    "name": "aws-lambda-plantk",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "typescript": "^4.8.4"
+    },
+    "devDependencies": {
+        "@types/aws-lambda": "^8.10.108",
+        "@types/node": "^18.11.3",
+        "@vercel/ncc": "^0.34.0"
+    }
+}
