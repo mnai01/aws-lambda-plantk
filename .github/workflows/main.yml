@@ -28,4 +28,4 @@ jobs:
               run: |
                   npx ncc build index.ts
                   zip -j deploy.zip ./dist/*
-                  aws lambda update-function-code --function-name=plantk-lambda --zip-file=fileb://deploy.zip
+                  aws lambda update-function-code --function-name=plantk-lambda --zip-file=fileb://deploy.zip --region us-east-2
