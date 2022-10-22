@@ -30,7 +30,7 @@ Resources:
             Timeout: 100
             Description: A simple example includes a HTTP get method to get all items from a DynamoDB table.
             Policies:
-                # Give Create/Read/Update/Delete Permissions to the SampleTable
+                # Give Create/Read/Update/Delete Permissions to the HousePlantsTable
                 - DynamoDBCrudPolicy:
                       TableName: !Ref HousePlantsTable
             Environment:
@@ -58,13 +58,13 @@ Resources:
             Timeout: 100
             Description: A simple example includes a HTTP get method to get one item by id from a DynamoDB table.
             Policies:
-                # Give Create/Read/Update/Delete Permissions to the SampleTable
+                # Give Create/Read/Update/Delete Permissions to the HousePlantsTable
                 - DynamoDBCrudPolicy:
-                      TableName: !Ref SampleTable
+                      TableName: !Ref HousePlantsTable
             Environment:
                 Variables:
                     # Make table name accessible as environment variable from function code during execution
-                    HOUSE_PLANTS_TABLE: !Ref SampleTable
+                    HOUSE_PLANTS_TABLE: !Ref HousePlantsTable
             Events:
                 Api:
                     Type: Api
@@ -86,13 +86,13 @@ Resources:
             Timeout: 100
             Description: A simple example includes a HTTP post method to add one item to a DynamoDB table.
             Policies:
-                # Give Create/Read/Update/Delete Permissions to the SampleTable
+                # Give Create/Read/Update/Delete Permissions to the HousePlantsTable
                 - DynamoDBCrudPolicy:
-                      TableName: !Ref SampleTable
+                      TableName: !Ref HousePlantsTable
             Environment:
                 Variables:
                     # Make table name accessible as environment variable from function code during execution
-                    HOUSE_PLANTS_TABLE: !Ref SampleTable
+                    HOUSE_PLANTS_TABLE: !Ref HousePlantsTable
             Events:
                 Api:
                     Type: Api
