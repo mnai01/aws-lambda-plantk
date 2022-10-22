@@ -5,7 +5,7 @@ const dynamodb = require('aws-sdk/clients/dynamodb');
 const docClient = new dynamodb.DocumentClient();
 
 // Get the DynamoDB table name from environment variables
-const tableName = process.env.SAMPLE_TABLE;
+const tableName = process.env.HOUSE_PLANTS_TABLE;
 
 /**
  * A simple example includes a HTTP post method to add one item to a DynamoDB table.
@@ -28,20 +28,20 @@ exports.putItemHandler = async (event) => {
 
     try {
         const params = {
-            TableName : tableName,
-            Item: { id : id, name: name }
+            TableName: tableName,
+            Item: { id: id, name: name },
         };
-    
+
         const result = await docClient.put(params).promise();
-    
+
         response = {
             statusCode: 200,
-            body: JSON.stringify(body)
+            body: JSON.stringify(body),
         };
     } catch (ResourceNotFoundException) {
         response = {
             statusCode: 404,
-            body: "Unable to call DynamoDB. Table resource not found."
+            body: 'Unable to call DynamoDB. Table resource not found.',
         };
     }
 

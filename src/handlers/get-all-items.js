@@ -1,7 +1,7 @@
 // Create clients and set shared const values outside of the handler.
 
 // Get the DynamoDB table name from environment variables
-const tableName = process.env.SAMPLE_TABLE;
+const tableName = process.env.HOUSE_PLANTS_TABLE;
 
 // Create a DocumentClient that represents the query to add an item
 const dynamodb = require('aws-sdk/clients/dynamodb');
@@ -25,23 +25,23 @@ exports.getAllItemsHandler = async (event) => {
 
     try {
         const params = {
-            TableName : tableName
+            TableName: tableName,
         };
         const data = await docClient.scan(params).promise();
         const items = data.Items;
 
         response = {
             statusCode: 200,
-            body: JSON.stringify(items)
+            body: JSON.stringify(items),
         };
     } catch (ResourceNotFoundException) {
         response = {
             statusCode: 404,
-            body: "Unable to call DynamoDB. Table resource not found."
+            body: 'Unable to call DynamoDB. Table resource not found.',
         };
     }
 
     // All log statements are written to CloudWatch
     console.info(`response from: ${event.path} statusCode: ${response.statusCode} body: ${response.body}`);
     return response;
-}
+};
