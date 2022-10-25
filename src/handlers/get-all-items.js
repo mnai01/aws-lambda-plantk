@@ -3,9 +3,16 @@
 // Get the DynamoDB table name from environment variables
 const tableName = process.env.HOUSE_PLANTS_TABLE;
 
+const AWS = require('aws-sdk');
+
+const settings = {};
+
+if (process.env.AWS_SAM_LOCAL) {
+    settings.endpoint = 'http://dynamodb-local:8000';
+}
+
 // Create a DocumentClient that represents the query to add an item
-const dynamodb = require('aws-sdk/clients/dynamodb');
-const docClient = new dynamodb.DocumentClient();
+const docClient = new AWS.DynamoDB.DocumentClient(settings);
 
 /**
  * A simple example includes a HTTP get method to get all items from a DynamoDB table.
