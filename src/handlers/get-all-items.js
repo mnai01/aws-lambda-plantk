@@ -4,6 +4,7 @@
 const tableName = process.env.HOUSE_PLANTS_TABLE;
 
 const AWS = require('aws-sdk');
+const { initSecret } = require("../utils/getSecret");
 
 const settings = {};
 
@@ -18,6 +19,16 @@ const docClient = new AWS.DynamoDB.DocumentClient(settings);
  * A simple example includes a HTTP get method to get all items from a DynamoDB table.
  */
 exports.getAllItemsHandler = async (event) => {
+
+    await initSecret
+    
+    console.log({SECRET: process.env.STORED_SECRET})
+    if (!process.env.STORED_SECRET) {
+        throw new Error(`Secret not set`);
+    }
+
+   
+
     if (event.httpMethod !== 'GET') {
         throw new Error(`getAllItems only accept GET method, you tried: ${event.httpMethod}`);
     }

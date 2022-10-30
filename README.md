@@ -1,5 +1,23 @@
 # plantk
 
+## TODO
+
+You must go into ur AWS Secret Manager client and add the Rapid API Secret Key as the value
+
+install 
+
+`sam cli`
+
+`aws cli`
+
+Run
+
+`aws configure`
+
+
+
+## Summary
+
 This project contains source code and supporting files for a serverless application that you can deploy with the AWS Serverless Application Model (AWS SAM) command line interface (CLI). It includes the following files and folders:
 
 -   `src` - Code for the application's Lambda function.
@@ -159,3 +177,53 @@ aws cloudformation delete-stack --stack-name plantk
 For an introduction to the AWS SAM specification, the AWS SAM CLI, and serverless application concepts, see the [AWS SAM Developer Guide](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/what-is-sam.html).
 
 Next, you can use the AWS Serverless Application Repository to deploy ready-to-use apps that go beyond Hello World samples and learn how authors developed their applications. For more information, see the [AWS Serverless Application Repository main page](https://aws.amazon.com/serverless/serverlessrepo/) and the [AWS Serverless Application Repository Developer Guide](https://docs.aws.amazon.com/serverlessrepo/latest/devguide/what-is-serverlessrepo.html).
+
+## Help
+
+HOW TO RUN
+
+Run docker `docker-compose up`
+
+Starts API gateway `sam local start-api --docker-network abp-sam-backend -n ./env.json --log-file logfile.txt`
+
+How to write data to local DB
+
+**Just a stock table that contains the PK**
+
+aws dynamodb create-table --cli-input-json file://sample-structure.json --endpoint-url http://localhost:8000
+
+**This will add new attributes to the table**
+
+aws dynamodb batch-write-item --request-items file://sample.json --endpoint-url http://localhost:8000
+
+**List tables**
+_remove http://localhost:8000 to check remote tables_
+
+aws dynamodb list-tables --endpoint-url http://localhost:8000
+
+sam local invoke getAllItemsFunction --profile default -e ./events/event-get-all-items.json --docker-network abp-sam-backend
+
+## Docker
+
+Make sure to set network for docker
+
+`docker-compose up`
+
+```
+version: '3.8'
+services:
+    dynamodb-local:
+        command: '-jar DynamoDBLocal.jar -sharedDb -dbPath ./data'
+        image: 'amazon/dynamodb-local:latest'
+        networks:
+            - backend
+        container_name: dynamodb-local
+        ports:
+            - '8000:8000'
+        volumes:
+            - './docker/dynamodb:/home/dynamodblocal/data'
+        working_dir: /home/dynamodblocal
+networks:
+    backend:
+        name: abp-sam-backend
+```

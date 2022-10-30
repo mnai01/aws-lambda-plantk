@@ -113,6 +113,13 @@ Resources:
                 ReadCapacityUnits: 2
                 WriteCapacityUnits: 2
 
+    RapidSecretkey:
+        Type: AWS::SecretsManager::Secret
+        Properties:
+            Description: 'Secret key from rapidAPI that keeps API secure from outside calls'
+            SecretStringTemplate: '{"secret": ""}'
+
+
 Outputs:
     WebEndpoint:
         Description: 'API Gateway endpoint URL for Prod stage'
