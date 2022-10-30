@@ -27,9 +27,14 @@ exports.getAllItemsHandler = async (event) => {
 
   await initSecret;
 
+  console.log(event["headers"]["X-Rapidapi-Proxy-Secret"]);
+  console.log({ STORED_SECRET: process.env.STORED_SECRET });
+
   // Verify RapidAPI secret token
-  if (!process.env.STORED_SECRET) {
-    throw new Error(`Secret not set`);
+  if (
+    process.env.STORED_SECRET !== event["headers"]["X-Rapidapi-Proxy-Secret"]
+  ) {
+    throw new Error(`Secret not match`);
   }
 
   if (event.httpMethod !== "GET") {
