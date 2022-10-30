@@ -117,7 +117,7 @@ Resources:
         Type: AWS::SecretsManager::Secret
         Properties:
             Description: 'Secret key from rapidAPI that keeps API secure from outside calls'
-            SecretStringTemplate: '{"secret": ""}'
+            SecretString: '{"secret": ""}'
 
 
 Outputs:
