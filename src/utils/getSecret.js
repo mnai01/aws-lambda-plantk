@@ -1,5 +1,5 @@
 const AWS = require("aws-sdk");
-const client = new AWS.SecretsManager({ region: "eu-west-1" });
+const client = new AWS.SecretsManager({ region: "us-east-2" });
 
 async function getSecret() {
   const secret = process.env["STORED_SECRET"];
