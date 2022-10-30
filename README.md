@@ -4,7 +4,7 @@
 
 You must go into ur AWS Secret Manager client and add the Rapid API Secret Key as the value
 
-GO TO Secret manager Select Retrieve secret value, Select edit on key, insert RapidAPISecretKey as value
+GO TO Secret manager -> Select Retrieve secret value -> Select edit on key -> insert RapidAPISecretKey as value
 
 install
 
