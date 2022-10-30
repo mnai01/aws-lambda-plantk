@@ -10,7 +10,7 @@ async function getSecret() {
   }
 
   const { SecretString } = await client
-    .getSecretValue({ SecretId: "RapidSecretkey"})
+    .getSecretValue({ SecretId: "RapidSecretkey" })
     .promise();
   console.log("*** SECRET WAS FETCHED FROM SECRETS MANAGER");
   return SecretString;
