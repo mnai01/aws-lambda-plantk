@@ -1,5 +1,5 @@
 {
-  "AWSTemplateFormatVersion": "2010-09-09T00:00:00.000Z",
+  "AWSTemplateFormatVersion": "2010-09-09",
   "Description": "plantk",
   "Transform": ["AWS::Serverless-2016-10-31"],
   "Resources": {
