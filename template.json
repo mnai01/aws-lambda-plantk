@@ -151,7 +151,7 @@
             {
               "Resource": "*",
               "Action": "secretsmanager:GetSecretValue",
-              "Effect": "Deny",
+              "Effect": "Allow",
               "Principal": {
                 "AWS": {
                   "Fn::Sub": "arn:aws:iam::${AWS::AccountId}:root"
