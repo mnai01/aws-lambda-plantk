@@ -149,14 +149,9 @@
           "Version": "2012-10-17",
           "Statement": [
             {
-              "Resource": "*",
-              "Action": "secretsmanager:GetSecretValue",
               "Effect": "Allow",
-              "Principal": {
-                "AWS": {
-                  "Fn::Sub": "arn:aws:iam::${AWS::AccountId}:root"
-                }
-              }
+              "Resource": "*",
+              "Action": "secretsmanager:GetSecretValue"
             }
           ]
         }
