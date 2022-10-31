@@ -134,6 +134,9 @@ Resources:
         Statement:
           - Resource: "*"
             Action: secretsmanager:GetSecretValue
+            Principal:
+              AWS:
+                Fn::Sub: arn:aws:iam::${AWS::AccountId}:root
 
 Outputs:
   WebEndpoint:
