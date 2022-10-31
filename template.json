@@ -150,8 +150,8 @@
           "Statement": [
             {
               "Effect": "Allow",
-              "Resource": "*",
-              "Action": "secretsmanager:GetSecretValue"
+              "Action": "secretsmanager:GetSecretValue",
+              "Resource": ["*"]
             }
           ]
         }
