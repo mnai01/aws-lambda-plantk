@@ -35,7 +35,8 @@ Resources:
             TableName: !Ref HousePlantsTable
         # Give access to secret resource
         - AWSSecretsManagerGetSecretValuePolicy:
-            SecretArn: !Ref RapidSecretkeyPolicy
+            SecretArn:
+              Ref: RapidSecretkeyPolicy
       Environment:
         Variables:
           # Make table name accessible as environment variable from function code during execution
@@ -126,7 +127,8 @@ Resources:
     Type: AWS::SecretsManager::ResourcePolicy
     Properties:
       BlockPublicPolicy: True
-      SecretId: !Ref: RapidSecretkey
+      SecretId:
+        Ref: RapidSecretkey
       ResourcePolicy:
         Version: "2012-10-17"
         Statement:
