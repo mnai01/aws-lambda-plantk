@@ -23,7 +23,7 @@
           {
             "AWSSecretsManagerGetSecretValuePolicy": {
               "SecretArn": {
-                "Ref": "RapidSecretkeyPolicy"
+                "Ref": "RapidSecretkey"
               }
             }
           }
@@ -136,25 +136,6 @@
       "Properties": {
         "Description": "Secret key from rapidAPI that keeps API secure from outside calls",
         "SecretString": "{\"secret\": \"\"}"
-      }
-    },
-    "RapidSecretkeyPolicy": {
-      "Type": "AWS::SecretsManager::ResourcePolicy",
-      "Properties": {
-        "BlockPublicPolicy": true,
-        "SecretId": {
-          "Ref": "RapidSecretkey"
-        },
-        "ResourcePolicy": {
-          "Version": "2012-10-17",
-          "Statement": [
-            {
-              "Effect": "Allow",
-              "Resource": "arn:aws:secretsmanager:${AWS::Region}:${AWS::AccountId}:secret:RapidSecretkey/*",
-              "Action": "secretsmanager:GetSecretValue"
-            }
-          ]
-        }
       }
     }
   },
