@@ -23,11 +23,6 @@
           {
             "AWSSecretsManagerGetSecretValuePolicy": {
               "Description": "Grants permissions to GetSecretValue for the specified AWS Secrets Manager secret",
-              "Parameters": {
-                "SecretArn": {
-                  "Description": "The ARN of the secret to grant access to"
-                }
-              },
               "Definition": {
                 "Statement": [
                   {
