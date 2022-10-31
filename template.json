@@ -22,7 +22,9 @@
           },
           {
             "AWSSecretsManagerGetSecretValuePolicy": {
-              "SecretArn": { "Ref": "arn:aws:secretsmanager:####" }
+              "SecretArn": {
+                "Ref": "RapidSecretkey"
+              }
             }
           }
         ],

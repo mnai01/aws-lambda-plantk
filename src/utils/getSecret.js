@@ -1,5 +1,5 @@
 const AWS = require("aws-sdk");
-const client = new AWS.SecretsManager({ region: "us-east-2" });
+const client = new AWS.SecretsManager({ region: process.env.AWS_REGION });
 
 async function getSecret() {
   const secret = process.env["STORED_SECRET"];
@@ -13,8 +13,6 @@ async function getSecret() {
     .getSecretValue({ SecretId: "RapidSecretkey" })
     .promise();
   console.log("*** SECRET WAS FETCHED FROM SECRETS MANAGER");
-
-  console.info({ secretObj });
 
   return secretObj.SecretString;
 }
