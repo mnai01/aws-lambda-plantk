@@ -29,7 +29,7 @@ exports.getAllItemsHandler = async (event) => {
     };
   }
 
-  await initSecret;
+  await initSecret();
 
   console.info({ RAPIDPROXY: event["headers"]["X-Rapidapi-Proxy-Secret"] });
   console.info({ STORED_SECRET: process.env.STORED_SECRET });
