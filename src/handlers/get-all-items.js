@@ -22,7 +22,11 @@ const docClient = new AWS.DynamoDB.DocumentClient(settings);
 exports.getAllItemsHandler = async (event) => {
   // Verify RapidAPI IPs
   if (!isValidIP(event)) {
-    throw new Error(`Not Valid IP`);
+    // throw new Error(`Not Valid IP`);
+    return {
+      statusCode: 200,
+      body: "Interal Server Error 1",
+    };
   }
 
   await initSecret;
@@ -34,7 +38,11 @@ exports.getAllItemsHandler = async (event) => {
   if (
     process.env.STORED_SECRET !== event["headers"]["X-Rapidapi-Proxy-Secret"]
   ) {
-    throw new Error(`Secret not match`);
+    // throw new Error(`Secret not match`);
+    return {
+      statusCode: 200,
+      body: "Interal Server Error 2",
+    };
   }
 
   if (event.httpMethod !== "GET") {
