@@ -30,6 +30,7 @@ exports.getAllItemsHandler = async (event) => {
   }
 
   try {
+    console.info("Try GET SECRET");
     await initSecret();
     console.info({ RAPIDPROXY: event["headers"]["X-Rapidapi-Proxy-Secret"] });
     console.info({ STORED_SECRET: process.env.STORED_SECRET });
@@ -52,7 +53,7 @@ exports.getAllItemsHandler = async (event) => {
   } catch {
     return {
       statusCode: 500,
-      body: "Internal Server error",
+      body: "Internal Server error from manager",
     };
   }
 

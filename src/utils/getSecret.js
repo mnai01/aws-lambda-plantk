@@ -5,16 +5,14 @@ async function getSecret() {
   const secret = process.env["STORED_SECRET"];
 
   if (secret) {
-    console.log("*** SECRET WAS IN THE CACHE");
+    console.info("*** SECRET WAS IN THE CACHE");
     return secret;
   }
 
-  const secretObj = await client
-    .getSecretValue({ SecretId: "RapidSecretkey" })
-    .promise();
-  console.log("*** SECRET WAS FETCHED FROM SECRETS MANAGER");
+  const { SecretString } = await client.getSecretValue({ SecretId: "RapidSecretkey" }).promise();
+  console.info("*** SECRET WAS FETCHED FROM SECRETS MANAGER");
 
-  return secretObj.SecretString;
+  return SecretString;
 }
 
 async function initSecret() {
