@@ -24,31 +24,40 @@ exports.getAllItemsHandler = async (event) => {
   if (!isValidIP(event)) {
     // throw new Error(`Not Valid IP`);
     return {
-      statusCode: 200,
-      body: "Interal Server Error 1",
+      statusCode: 401,
+      body: "Unauthorized IP Address",
     };
   }
 
-  await initSecret();
+  try {
+    await initSecret();
+    console.info({ RAPIDPROXY: event["headers"]["X-Rapidapi-Proxy-Secret"] });
+    console.info({ STORED_SECRET: process.env.STORED_SECRET });
 
-  console.info({ RAPIDPROXY: event["headers"]["X-Rapidapi-Proxy-Secret"] });
-  console.info({ STORED_SECRET: process.env.STORED_SECRET });
+    // Verify RapidAPI secret token
+    if (!event["headers"]["X-Rapidapi-Proxy-Secret"]) {
+      // throw new Error(`Secret not match`);
+      return {
+        statusCode: 401,
+        body: "Unauthorized User 100",
+      };
+    }
 
-  // Verify RapidAPI secret token
-  if (
-    process.env.STORED_SECRET !== event["headers"]["X-Rapidapi-Proxy-Secret"]
-  ) {
-    // throw new Error(`Secret not match`);
+    if (process.env.STORED_SECRET !== event["headers"]["X-Rapidapi-Proxy-Secret"]) {
+      return {
+        statusCode: 401,
+        body: "Unauthorized User 101",
+      };
+    }
+  } catch {
     return {
-      statusCode: 200,
-      body: "Interal Server Error 2",
+      statusCode: 500,
+      body: "Internal Server error",
     };
   }
 
   if (event.httpMethod !== "GET") {
-    throw new Error(
-      `getAllItems only accept GET method, you tried: ${event.httpMethod}`
-    );
+    throw new Error(`getAllItems only accept GET method, you tried: ${event.httpMethod}`);
   }
   // All log statements are written to CloudWatch
   console.info("received:", event);
@@ -78,8 +87,6 @@ exports.getAllItemsHandler = async (event) => {
   }
 
   // All log statements are written to CloudWatch
-  console.info(
-    `response from: ${event.path} statusCode: ${response.statusCode} body: ${response.body}`
-  );
+  console.info(`response from: ${event.path} statusCode: ${response.statusCode} body: ${response.body}`);
   return response;
 };
