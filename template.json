@@ -150,8 +150,8 @@
           "Statement": [
             {
               "Effect": "Allow",
-              "Action": "secretsmanager:GetSecretValue",
-              "Resource": ["*"]
+              "Resource": "arn:aws:secretsmanager:${AWS::Region}:${AWS::AccountId}:secret:RapidSecretkey/*",
+              "Action": "secretsmanager:GetSecretValue"
             }
           ]
         }
