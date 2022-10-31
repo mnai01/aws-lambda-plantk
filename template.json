@@ -22,25 +22,7 @@
           },
           {
             "AWSSecretsManagerGetSecretValuePolicy": {
-              "Description": "Grants permissions to GetSecretValue for the specified AWS Secrets Manager secret",
-              "Definition": {
-                "Statement": [
-                  {
-                    "Effect": "Allow",
-                    "Action": ["secretsmanager:GetSecretValue"],
-                    "Resource": {
-                      "Fn::Sub": [
-                        "${secretArn}",
-                        {
-                          "secretArn": {
-                            "Ref": "SecretArn"
-                          }
-                        }
-                      ]
-                    }
-                  }
-                ]
-              }
+              "SecretArn": { "Ref": "arn:aws:secretsmanager:####" }
             }
           }
         ],
