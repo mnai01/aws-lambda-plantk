@@ -32,11 +32,11 @@ exports.getAllItemsHandler = async (event) => {
   try {
     console.info("Try GET SECRET");
     await initSecret();
-    console.info({ RAPIDPROXY: event["headers"]["x-rapidapi-proxy-secret"] });
+    console.info({ RAPIDPROXY: event["headers"]["X-RapidAPI-Proxy-Secret"] });
     console.info(process.env.STORED_SECRET);
     console.info(event["headers"]);
     // Verify RapidAPI secret token
-    if (!event["headers"]["x-rapidapi-proxy-secret"]) {
+    if (!event["headers"]["X-RapidAPI-Proxy-Secret"]) {
       // throw new Error(`Secret not match`);
       return {
         statusCode: 401,
@@ -44,7 +44,7 @@ exports.getAllItemsHandler = async (event) => {
       };
     }
 
-    if (process.env.STORED_SECRET !== event["headers"]["x-rapidapi-proxy-secret"]) {
+    if (process.env.STORED_SECRET !== event["headers"]["X-RapidAPI-Proxy-Secret"]) {
       return {
         statusCode: 401,
         body: "Unauthorized User 101",
