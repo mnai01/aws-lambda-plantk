@@ -33,7 +33,7 @@ exports.getAllItemsHandler = async (event) => {
     console.info("Try GET SECRET");
     await initSecret();
     console.info({ RAPIDPROXY: event["headers"]["X-Rapidapi-Proxy-Secret"] });
-    console.info({ STORED_SECRET: process.env.STORED_SECRET });
+    console.info(process.env.STORED_SECRET);
 
     // Verify RapidAPI secret token
     if (!event["headers"]["X-Rapidapi-Proxy-Secret"]) {
