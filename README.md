@@ -2,9 +2,11 @@
 
 ## TODO
 
-You must go into ur AWS Secret Manager client and add the Rapid API Secret Key as the value
+After first deploy you must go into ur AWS Secret Manager client and add the Rapid API Secret Key as the value
 
 GO TO Secret manager -> Select Retrieve secret value -> Select edit on key -> insert RapidAPISecretKey as value
+
+Then copy the SecretID name and place it in the getSecret file
 
 install
 
