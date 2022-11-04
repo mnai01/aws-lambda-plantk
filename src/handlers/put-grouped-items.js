@@ -60,7 +60,6 @@ exports.putGroupedItemsHandler = async (event) => {
       body: "Success",
     };
   } catch (ResourceNotFoundException) {
-    console.info({ ResourceNotFoundException });
     response = {
       statusCode: 404,
       body: "Unable to call DynamoDB. Table resource not found.",
