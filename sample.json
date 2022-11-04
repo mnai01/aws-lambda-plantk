@@ -1,0 +1,226 @@
+{
+    "HousePlantsTable": [
+        {
+            "PutRequest": {
+                "Item": {
+                    "id": {
+                        "S": "72c422ac-6c0d-4d61-9497-2c2ba895d099"
+                    },
+                    "Latin name": {
+                        "S": "Adiantum hispidulum"
+                    },
+                    "Family": {
+                        "S": "Polypodiaceae"
+                    },
+                    "Other names": {
+                        "S": ""
+                    },
+                    "Common name": {
+                        "S": "Rosy Maidenhair, Autralian maidenhair"
+                    },
+                    "Common name (fr.)": {
+                        "S": "Capillaire rose"
+                    },
+                    "Description": {
+                        "S": ""
+                    },
+                    "Categories": {
+                        "S": "Fern"
+                    },
+                    "Origin": {
+                        "S": "Australia & New Guinea"
+                    },
+                    "Climat": {
+                        "S": "Tropical"
+                    },
+                    "Temperature max. (C)": {
+                        "S": "30"
+                    },
+                    "Temperature min. (C)": {
+                        "S": "12"
+                    },
+                    "Zone": {
+                        "S": "10,,,8"
+                    },
+                    "Growth": {
+                        "S": "Regular"
+                    },
+                    "Light ideal": {
+                        "S": "Strong light ( 21,500 to 3,200 lux/2000 to 300 fc)"
+                    },
+                    "Light tolered": {
+                        "S": "Diffuse light ( Less than 5,300 lux / 500 fc)"
+                    },
+                    "Watering": {
+                        "S": "Keep moist between watering & Must not dry between watering"
+                    },
+                    "Insects": {
+                        "S": "Mealy bug , Aphid & Snail"
+                    },
+                    "Disease": {
+                        "S": "Gray mold"
+                    },
+                    "Appeal": {
+                        "S": "Foliage"
+                    },
+                    "Color of leaf": {
+                        "S": "Dark green & Light green"
+                    },
+                    "Color of blooms": {
+                        "S": ""
+                    },
+                    "Blooming season": {
+                        "S": ""
+                    },
+                    "Perfume": {
+                        "S": ""
+                    },
+                    "Avaibility": {
+                        "S": "Regular"
+                    },
+                    "Pot diameter (cm)": {
+                        "S": "15"
+                    },
+                    "Height at purchase (m)": {
+                        "S": "0.25"
+                    },
+                    "Width at purchase (m)": {
+                        "S": "0.15"
+                    },
+                    "Height potential (m)": {
+                        "S": "0.61"
+                    },
+                    "Width potential (m)": {
+                        "S": "0.91"
+                    },
+                    "Available sizes (Pot )": {
+                        "S": "4in to 8in / 10cm to 20cm"
+                    },
+                    "Bearing": {
+                        "S": "Clump"
+                    },
+                    "Pruning": {
+                        "S": "Never"
+                    },
+                    "Style": {
+                        "S": ""
+                    },
+                    "Use": {
+                        "S": "Table top , Ground cover & Tertiary"
+                    }
+                }
+            }
+        },
+        {
+            "PutRequest": {
+                "Item": {
+                    "id": {
+                        "S": "93ad273d-8f88-4188-93d8-dca84ec37a51"
+                    },
+                    "Latin name": {
+                        "S": "Adiantum raddianum"
+                    },
+                    "Family": {
+                        "S": "Polypodiaceae"
+                    },
+                    "Other names": {
+                        "S": "cuneatum"
+                    },
+                    "Common name": {
+                        "S": "Maindenhair, Delta maidenhair"
+                    },
+                    "Common name (fr.)": {
+                        "S": "Capilaire"
+                    },
+                    "Description": {
+                        "S": ""
+                    },
+                    "Categories": {
+                        "S": "Fern"
+                    },
+                    "Origin": {
+                        "S": "Brazil"
+                    },
+                    "Climat": {
+                        "S": "Tropical"
+                    },
+                    "Temperature max. (C)": {
+                        "S": "30"
+                    },
+                    "Temperature min. (C)": {
+                        "S": "12"
+                    },
+                    "Zone": {
+                        "S": "10,,,8"
+                    },
+                    "Growth": {
+                        "S": "Regular"
+                    },
+                    "Light ideal": {
+                        "S": "Strong light ( 21,500 to 3,200 lux/2000 to 300 fc)"
+                    },
+                    "Light tolered": {
+                        "S": "Diffuse light ( Less than 5,300 lux / 500 fc)"
+                    },
+                    "Watering": {
+                        "S": "Keep moist between watering & Must not dry between watering"
+                    },
+                    "Insects": {
+                        "S": "Mealy bug , Aphid & Snail"
+                    },
+                    "Disease": {
+                        "S": "Gray mold"
+                    },
+                    "Appeal": {
+                        "S": "Foliage"
+                    },
+                    "Color of leaf": {
+                        "S": "Medium green & Light green"
+                    },
+                    "Color of blooms": {
+                        "S": ""
+                    },
+                    "Blooming season": {
+                        "S": ""
+                    },
+                    "Perfume": {
+                        "S": ""
+                    },
+                    "Avaibility": {
+                        "S": "Regular"
+                    },
+                    "Pot diameter (cm)": {
+                        "S": "25"
+                    },
+                    "Height at purchase (m)": {
+                        "S": "0.46"
+                    },
+                    "Width at purchase (m)": {
+                        "S": "0.61"
+                    },
+                    "Height potential (m)": {
+                        "S": "0.61"
+                    },
+                    "Width potential (m)": {
+                        "S": "0.91"
+                    },
+                    "Available sizes (Pot )": {
+                        "S": "4in to 8in / 10cm to 20cm"
+                    },
+                    "Bearing": {
+                        "S": "Clump"
+                    },
+                    "Pruning": {
+                        "S": "Never"
+                    },
+                    "Style": {
+                        "S": ""
+                    },
+                    "Use": {
+                        "S": "Potted plant , Ground cover & Table top"
+                    }
+                }
+            }
+        }
+    ]
+}
