@@ -1,7 +1,6 @@
 // Create clients and set shared const values outside of the handler.
 const AWS = require("aws-sdk");
-const { initSecret } = require("../utils/getSecret");
-const { isValidIP } = require("../utils/isValidIP");
+const { checkRequirements } = require("../helper/checkRequirements");
 
 // Get the DynamoDB table name from environment variables
 const tableName = process.env.HOUSE_PLANTS_TABLE;
@@ -10,47 +9,20 @@ const tableName = process.env.HOUSE_PLANTS_TABLE;
  * A simple example includes a HTTP get method to get all items from a DynamoDB table.
  */
 exports.getAllItemsHandler = async (event) => {
-  // Alot of Request testing programs lowercase the header name so this is needed for local development
-  const RAPID_SECRET_TOKEN_KEY = !process.env.AWS_SAM_LOCAL ? "X-RapidAPI-Proxy-Secret" : "X-Rapidapi-Proxy-Secret";
-
-  // Verify RapidAPI IPs
-  if (!isValidIP(event)) {
-    // throw new Error(`Not Valid IP`);
-    return {
-      statusCode: 401,
-      body: "Unauthorized IP Address",
-    };
-  }
-
-  try {
-    await initSecret();
-
-    console.info(event["headers"]);
-
-    // Verify RapidAPI secret token
-    if (!event["headers"][RAPID_SECRET_TOKEN_KEY]) {
-      // throw new Error(`Secret not match`);
-      return {
-        statusCode: 401,
-        body: "Unauthorized User 100",
-      };
-    }
-
-    if (process.env.STORED_SECRET !== event["headers"][RAPID_SECRET_TOKEN_KEY]) {
-      return {
-        statusCode: 401,
-        body: "Unauthorized User 101",
-      };
-    }
-  } catch {
-    return {
-      statusCode: 500,
-      body: "Internal Server error from manager",
-    };
-  }
-
   if (event.httpMethod !== "GET") {
     throw new Error(`getAllItems only accept GET method, you tried: ${event.httpMethod}`);
+  }
+  try {
+    // goes through security checks
+    const errors = await checkRequirements(event);
+    if (errors) {
+      return errors;
+    }
+  } catch (err) {
+    return {
+      statusCode: 500,
+      body: "Internal Server Error",
+    };
   }
 
   // get all items from the table (only first 1MB data, you can use `LastEvaluatedKey` to get the rest of data)

@@ -118,6 +118,42 @@
         }
       }
     },
+    "putGroupedItemsFunction": {
+      "Type": "AWS::Serverless::Function",
+      "Properties": {
+        "Handler": "src/handlers/put-grouped-items.putGroupedItemsHandler",
+        "Runtime": "nodejs14.x",
+        "Architectures": ["x86_64"],
+        "MemorySize": 128,
+        "Timeout": 100,
+        "Description": "A simple example includes a HTTP post method to add multiple item to a DynamoDB table.",
+        "Policies": [
+          {
+            "DynamoDBCrudPolicy": {
+              "TableName": {
+                "Ref": "HousePlantsTable"
+              }
+            }
+          }
+        ],
+        "Environment": {
+          "Variables": {
+            "HOUSE_PLANTS_TABLE": {
+              "Ref": "HousePlantsTable"
+            }
+          }
+        },
+        "Events": {
+          "Api": {
+            "Type": "Api",
+            "Properties": {
+              "Path": "/add",
+              "Method": "POST"
+            }
+          }
+        }
+      }
+    },
     "HousePlantsTable": {
       "Type": "AWS::Serverless::SimpleTable",
       "Properties": {
