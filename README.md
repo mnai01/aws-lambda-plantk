@@ -229,3 +229,9 @@ networks:
     backend:
         name: abp-sam-backend
 ```
+
+## DocumentClient
+
+The DynamoDB Document Client is the easiest and most preferred way to interact with a DynamoDB database from a Nodejs or JavaScript application. The document client simplifies working with items in Amazon DynamoDB by abstracting away the notion of attribute values. This abstraction annotates native JavaScript types supplied as input parameters, as well as converts annotated response data to native JavaScript types.
+
+TDLR; from my understanding it makes it easier to deal with DynamoDB by removing its weird needed types in a JSON item
