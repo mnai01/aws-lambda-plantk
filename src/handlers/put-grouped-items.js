@@ -28,21 +28,20 @@ exports.putGroupedItemsHandler = async (event) => {
     };
   }
 
+  // Creates a new item, or replaces an old item with a new item
+  // https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/DynamoDB/DocumentClient.html#put-property
+  let response = {};
   const settings = {};
 
   if (process.env.AWS_SAM_LOCAL) {
     settings.endpoint = "http://dynamodb-local:8000";
   }
 
+  // Create a DocumentClient that represents the query to add an item
   const docClient = new AWS.DynamoDB.DocumentClient(settings);
-
-  // Creates a new item, or replaces an old item with a new item
-  // https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/DynamoDB/DocumentClient.html#put-property
-  let response = {};
 
   try {
     let temp = [];
-
     await data.HousePlantsTable.forEach((record) => {
       temp.push(record);
       // TODO If at last index push the remaining in the array

@@ -1,10 +1,8 @@
 // Create clients and set shared const values outside of the handler.
 
 // Create a DocumentClient that represents the query to add an item
-const dynamodb = require("aws-sdk/clients/dynamodb");
-const docClient = new dynamodb.DocumentClient();
+const AWS = require("aws-sdk");
 const { checkRequirements } = require("../helper/checkRequirements");
-
 // Get the DynamoDB table name from environment variables
 const tableName = process.env.HOUSE_PLANTS_TABLE;
 
@@ -36,6 +34,14 @@ exports.putItemHandler = async (event) => {
   // Creates a new item, or replaces an old item with a new item
   // https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/DynamoDB/DocumentClient.html#put-property
   let response = {};
+  const settings = {};
+
+  if (process.env.AWS_SAM_LOCAL) {
+    settings.endpoint = "http://dynamodb-local:8000";
+  }
+
+  // Create a DocumentClient that represents the query to add an item
+  const docClient = new AWS.DynamoDB.DocumentClient(settings);
 
   try {
     const params = {

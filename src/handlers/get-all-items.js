@@ -51,6 +51,7 @@ exports.getAllItemsHandler = async (event) => {
       body: JSON.stringify(items),
     };
   } catch (ResourceNotFoundException) {
+    console.info(ResourceNotFoundException);
     response = {
       statusCode: 404,
       body: "Unable to call DynamoDB. Table resource not found.",
