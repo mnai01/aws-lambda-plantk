@@ -1,0 +1,308 @@
+{
+  "HousePlantsTable": [
+    {
+      "PutRequest": {
+        "Item": {
+          "img": {
+            "S": "http://www.tropicopia.com/house-plant/thumbnails/5436.jpg"
+          },
+          "id": {
+            "S": "0592736a-1689-4e7f-a5d0-be7519bda4d2"
+          },
+          "url": {
+            "S": "http://www.tropicopia.com/house-plant/detail.np/detail-01.html"
+          },
+          "Latin name": {
+            "S": "Adiantum hispidulum"
+          },
+          "Family": {
+            "S": "Polypodiaceae"
+          },
+          "Other names": {
+            "S": ""
+          },
+          "Common name": {
+            "L": ["Rosy Maidenhair", "Autralian maidenhair"]
+          },
+          "Common name (fr.)": {
+            "S": "Capillaire rose"
+          },
+          "Description": {
+            "S": ""
+          },
+          "Categories": {
+            "S": "Fern"
+          },
+          "Origin": {
+            "L": ["Australia", "New Guinea"]
+          },
+          "Climat": {
+            "S": "Tropical"
+          },
+          "Temperature max. (C)": {
+            "S": "30"
+          },
+          "Temperature min. (C)": {
+            "S": "12"
+          },
+          "Zone": {
+            "L": ["10", "8"]
+          },
+          "Growth": {
+            "S": "Regular"
+          },
+          "Light ideal": {
+            "S": "Strong light ( 21,500 to 3,200 lux/2000 to 300 fc)"
+          },
+          "Light tolered": {
+            "S": "Diffuse light ( Less than 5,300 lux / 500 fc)"
+          },
+          "Watering": {
+            "S": "Keep moist between watering & Must not dry between watering"
+          },
+          "Insects": {
+            "L": ["Mealy bug", "Aphid", "Snail"]
+          },
+          "Disease": {
+            "S": "Gray mold"
+          },
+          "Appeal": {
+            "S": "Foliage"
+          },
+          "Color of leaf": {
+            "L": ["Dark green", "Light green"]
+          },
+          "Color of blooms": {
+            "S": ""
+          },
+          "Blooming season": {
+            "S": ""
+          },
+          "Perfume": {
+            "S": ""
+          },
+          "Avaibility": {
+            "S": "Regular"
+          },
+          "Pot diameter (cm)": {
+            "M": {
+              "cm": {
+                "N": 15.0
+              },
+              "m": {
+                "N": 0.15
+              }
+            }
+          },
+          "Height at purchase (m)": {
+            "M": {
+              "cm": {
+                "N": 25.0
+              },
+              "m": {
+                "N": 0.25
+              }
+            }
+          },
+          "Width at purchase (m)": {
+            "M": {
+              "cm": {
+                "N": 15.0
+              },
+              "m": {
+                "N": 0.15
+              }
+            }
+          },
+          "Height potential (m)": {
+            "M": {
+              "cm": {
+                "N": 61.0
+              },
+              "m": {
+                "N": 0.61
+              }
+            }
+          },
+          "Width potential (m)": {
+            "M": {
+              "cm": {
+                "N": 91.0
+              },
+              "m": {
+                "N": 0.91
+              }
+            }
+          },
+          "Available sizes (Pot )": {
+            "S": "4in to 8in / 10cm to 20cm"
+          },
+          "Bearing": {
+            "S": "Clump"
+          },
+          "Pruning": {
+            "S": "Never"
+          },
+          "Style": {
+            "S": ""
+          },
+          "Use": {
+            "L": ["Table top", "Ground cover", "Tertiary"]
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "img": {
+            "S": "http://www.tropicopia.com/house-plant/thumbnails/5437.jpg"
+          },
+          "id": {
+            "S": "e4418368-b569-4ca5-9ef9-7b117ba25fe7"
+          },
+          "url": {
+            "S": "http://www.tropicopia.com/house-plant/detail.np/detail-02.html"
+          },
+          "Latin name": {
+            "S": "Adiantum raddianum"
+          },
+          "Family": {
+            "S": "Polypodiaceae"
+          },
+          "Other names": {
+            "S": "cuneatum"
+          },
+          "Common name": {
+            "L": ["Maindenhair", "Delta maidenhair"]
+          },
+          "Common name (fr.)": {
+            "S": "Capilaire"
+          },
+          "Description": {
+            "S": ""
+          },
+          "Categories": {
+            "S": "Fern"
+          },
+          "Origin": {
+            "L": ["Brazil"]
+          },
+          "Climat": {
+            "S": "Tropical"
+          },
+          "Temperature max. (C)": {
+            "S": "30"
+          },
+          "Temperature min. (C)": {
+            "S": "12"
+          },
+          "Zone": {
+            "L": ["10", "8"]
+          },
+          "Growth": {
+            "S": "Regular"
+          },
+          "Light ideal": {
+            "S": "Strong light ( 21,500 to 3,200 lux/2000 to 300 fc)"
+          },
+          "Light tolered": {
+            "S": "Diffuse light ( Less than 5,300 lux / 500 fc)"
+          },
+          "Watering": {
+            "S": "Keep moist between watering & Must not dry between watering"
+          },
+          "Insects": {
+            "L": ["Mealy bug", "Aphid", "Snail"]
+          },
+          "Disease": {
+            "S": "Gray mold"
+          },
+          "Appeal": {
+            "S": "Foliage"
+          },
+          "Color of leaf": {
+            "L": ["Medium green", "Light green"]
+          },
+          "Color of blooms": {
+            "S": ""
+          },
+          "Blooming season": {
+            "S": ""
+          },
+          "Perfume": {
+            "S": ""
+          },
+          "Avaibility": {
+            "S": "Regular"
+          },
+          "Pot diameter (cm)": {
+            "M": {
+              "cm": {
+                "N": 25.0
+              },
+              "m": {
+                "N": 0.25
+              }
+            }
+          },
+          "Height at purchase (m)": {
+            "M": {
+              "cm": {
+                "N": 46.0
+              },
+              "m": {
+                "N": 0.46
+              }
+            }
+          },
+          "Width at purchase (m)": {
+            "M": {
+              "cm": {
+                "N": 61.0
+              },
+              "m": {
+                "N": 0.61
+              }
+            }
+          },
+          "Height potential (m)": {
+            "M": {
+              "cm": {
+                "N": 61.0
+              },
+              "m": {
+                "N": 0.61
+              }
+            }
+          },
+          "Width potential (m)": {
+            "M": {
+              "cm": {
+                "N": 91.0
+              },
+              "m": {
+                "N": 0.91
+              }
+            }
+          },
+          "Available sizes (Pot )": {
+            "S": "4in to 8in / 10cm to 20cm"
+          },
+          "Bearing": {
+            "S": "Clump"
+          },
+          "Pruning": {
+            "S": "Never"
+          },
+          "Style": {
+            "S": ""
+          },
+          "Use": {
+            "L": ["Potted plant", "Ground cover", "Table top"]
+          }
+        }
+      }
+    }
+  ]
+}
