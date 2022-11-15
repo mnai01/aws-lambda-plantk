@@ -46,10 +46,11 @@ exports.putGroupedItemsHandler = async (event) => {
     let temp = [];
     await body.HousePlantsTable.forEach((record) => {
       temp.push(record);
-      console.info({ temp, body });
+      console.info({ temp, body }, temp.length === 25);
       // TODO If at last index push the remaining in the array
       if (temp.length === 25) {
         const params = { RequestItems: { [tableName]: temp } };
+        console.info(params, "IN CONDITION");
         docClient.batchWrite(params, function (err, data) {
           if (err) console.info({ err, data }); // an error occurred
           else console.info({ SUCCESS: data }); // successful response
