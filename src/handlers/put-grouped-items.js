@@ -46,6 +46,7 @@ exports.putGroupedItemsHandler = async (event) => {
     let temp = [];
     await body.HousePlantsTable.forEach((record) => {
       temp.push(record);
+      console.info({ temp, body });
       // TODO If at last index push the remaining in the array
       if (temp.length === 25) {
         const params = { RequestItems: { [tableName]: temp } };
@@ -61,6 +62,7 @@ exports.putGroupedItemsHandler = async (event) => {
       body: "Success",
     };
   } catch (ResourceNotFoundException) {
+    console.info(ResourceNotFoundException);
     response = {
       statusCode: 404,
       body: "Unable to call DynamoDB. Table resource not found.",
