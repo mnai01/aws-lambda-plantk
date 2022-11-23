@@ -1,6 +1,10 @@
 # plantk
 
-## TODO
+## API Access
+
+[RapidApi - House Plants](https://rapidapi.com/mnai01/api/house-plants2)
+
+## Start
 
 After first deploy you must go into ur AWS Secret Manager client and add the Rapid API Secret Key as the value
 
@@ -17,6 +21,10 @@ install
 Run
 
 `aws configure`
+
+## System Design
+
+![SysDesign](./System_Design.png)
 
 ## Summary
 
