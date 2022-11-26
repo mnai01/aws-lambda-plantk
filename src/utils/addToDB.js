@@ -9,11 +9,20 @@ const putItemHandler = async () => {
 
   try {
     let temp = [];
-    await data.HousePlantsTable.forEach((record) => {
+    await data.HousePlantsTable.forEach((record, index) => {
       temp.push(record);
       // TODO If at last index push the remaining in the array
       if (temp.length === 25) {
-        const params = { RequestItems: { ["DATABASE_NAME_HERE"]: temp } };
+        const params = { RequestItems: { ["sam-pipelines-prod-HousePlantsTable-1T35AWB2G9NRP"]: temp } };
+        docClient.batchWrite(params, function (err, data) {
+          if (err) console.info({ err, data }); // an error occurred
+          else console.info({ SUCCESS: data }); // successful response
+        });
+        temp.length = 0;
+      }
+      // final push
+      if (data.HousePlantsTable.length === index + 1) {
+        const params = { RequestItems: { ["sam-pipelines-prod-HousePlantsTable-1T35AWB2G9NRP"]: temp } };
         docClient.batchWrite(params, function (err, data) {
           if (err) console.info({ err, data }); // an error occurred
           else console.info({ SUCCESS: data }); // successful response

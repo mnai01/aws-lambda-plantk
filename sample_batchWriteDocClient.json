@@ -4,19 +4,21 @@
       "PutRequest": {
         "Item": {
           "img": "http://www.tropicopia.com/house-plant/thumbnails/5436.jpg",
-          "id": "1c48ef6f-5844-4364-87e5-e37d88b11fbc",
+          "id": "ddb797fe-66f1-5737-9097-a1ef55bc2509",
           "url": "http://www.tropicopia.com/house-plant/detail.np/detail-01.html",
           "Latin name": "Adiantum hispidulum",
           "Family": "Polypodiaceae",
-          "Other names": "",
+          "Other names": null,
           "Common name": ["Rosy Maidenhair", "Autralian maidenhair"],
           "Common name (fr.)": "Capillaire rose",
-          "Description": "",
+          "Description": null,
           "Categories": "Fern",
           "Origin": ["Australia", "New Guinea"],
           "Climat": "Tropical",
-          "Temperature max. (C)": "30",
-          "Temperature min. (C)": "12",
+          "Temperature": {
+            "C": 12.0,
+            "F": 53.6
+          },
           "Zone": ["10", "8"],
           "Growth": "Regular",
           "Light ideal": "Strong light ( 21,500 to 3,200 lux/2000 to 300 fc)",
@@ -26,34 +28,34 @@
           "Disease": "Gray mold",
           "Appeal": "Foliage",
           "Color of leaf": ["Dark green", "Light green"],
-          "Color of blooms": "",
-          "Blooming season": "",
-          "Perfume": "",
+          "Color of blooms": null,
+          "Blooming season": null,
+          "Perfume": null,
           "Avaibility": "Regular",
           "Pot diameter (cm)": {
             "cm": 15.0,
             "m": 0.15
           },
-          "Height at purchase (m)": {
+          "Height at purchase": {
             "cm": 25.0,
             "m": 0.25
           },
-          "Width at purchase (m)": {
+          "Width at purchase": {
             "cm": 15.0,
             "m": 0.15
           },
-          "Height potential (m)": {
+          "Height potential": {
             "cm": 61.0,
             "m": 0.61
           },
-          "Width potential (m)": {
+          "Width potential": {
             "cm": 91.0,
             "m": 0.91
           },
-          "Available sizes (Pot )": "4in to 8in / 10cm to 20cm",
+          "Available sizes (Pot)": "4in to 8in / 10cm to 20cm",
           "Bearing": "Clump",
           "Pruning": "Never",
-          "Style": "",
+          "Style": null,
           "Use": ["Table top", "Ground cover", "Tertiary"]
         }
       }
@@ -62,19 +64,21 @@
       "PutRequest": {
         "Item": {
           "img": "http://www.tropicopia.com/house-plant/thumbnails/5437.jpg",
-          "id": "1b806ff0-7b91-4426-acbb-71dd99f15d5d",
+          "id": "6fcfb288-5a1f-53aa-ba7d-fcad91b11aab",
           "url": "http://www.tropicopia.com/house-plant/detail.np/detail-02.html",
           "Latin name": "Adiantum raddianum",
           "Family": "Polypodiaceae",
           "Other names": "cuneatum",
           "Common name": ["Maindenhair", "Delta maidenhair"],
           "Common name (fr.)": "Capilaire",
-          "Description": "",
+          "Description": null,
           "Categories": "Fern",
           "Origin": ["Brazil"],
           "Climat": "Tropical",
-          "Temperature max. (C)": "30",
-          "Temperature min. (C)": "12",
+          "Temperature": {
+            "C": 12.0,
+            "F": 53.6
+          },
           "Zone": ["10", "8"],
           "Growth": "Regular",
           "Light ideal": "Strong light ( 21,500 to 3,200 lux/2000 to 300 fc)",
@@ -84,34 +88,34 @@
           "Disease": "Gray mold",
           "Appeal": "Foliage",
           "Color of leaf": ["Medium green", "Light green"],
-          "Color of blooms": "",
-          "Blooming season": "",
-          "Perfume": "",
+          "Color of blooms": null,
+          "Blooming season": null,
+          "Perfume": null,
           "Avaibility": "Regular",
           "Pot diameter (cm)": {
             "cm": 25.0,
             "m": 0.25
           },
-          "Height at purchase (m)": {
+          "Height at purchase": {
             "cm": 46.0,
             "m": 0.46
           },
-          "Width at purchase (m)": {
+          "Width at purchase": {
             "cm": 61.0,
             "m": 0.61
           },
-          "Height potential (m)": {
+          "Height potential": {
             "cm": 61.0,
             "m": 0.61
           },
-          "Width potential (m)": {
+          "Width potential": {
             "cm": 91.0,
             "m": 0.91
           },
-          "Available sizes (Pot )": "4in to 8in / 10cm to 20cm",
+          "Available sizes (Pot)": "4in to 8in / 10cm to 20cm",
           "Bearing": "Clump",
           "Pruning": "Never",
-          "Style": "",
+          "Style": null,
           "Use": ["Potted plant", "Ground cover", "Table top"]
         }
       }
