@@ -135,7 +135,11 @@
       "Type": "AWS::Serverless::Function",
       "Properties": {
         "Handler": "src/handlers/handler.authorizer",
-        "Runtime": "nodejs14.x"
+        "Runtime": "nodejs14.x",
+        "Architectures": ["x86_64"],
+        "MemorySize": 128,
+        "Timeout": 100,
+        "Description": "Authenticator for API gateway, this gets ran before ever API call"
       }
     }
   },
