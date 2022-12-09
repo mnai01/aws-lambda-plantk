@@ -143,7 +143,7 @@
     "WebEndpoint": {
       "Description": "API Gateway endpoint URL for Prod stage",
       "Value": {
-        "Fn::Sub": "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/"
+        "Fn::Sub": "https://${RapidApiGateway}.execute-api.${AWS::Region}.amazonaws.com/Prod/"
       }
     }
   }
