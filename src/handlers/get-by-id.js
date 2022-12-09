@@ -13,18 +13,6 @@ exports.getByIdHandler = async (event) => {
   if (event.httpMethod !== "GET") {
     throw new Error(`getMethod only accept GET method, you tried: ${event.httpMethod}`);
   }
-  try {
-    // goes through security checks
-    const errors = await checkRequirements(event);
-    if (errors) {
-      return errors;
-    }
-  } catch (err) {
-    return {
-      statusCode: 500,
-      body: "Internal Server Error",
-    };
-  }
 
   // Get id from pathParameters from APIGateway because of `/{id}` at template.json
   const id = event.pathParameters.id;

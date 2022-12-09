@@ -12,18 +12,6 @@ exports.getAllItemsHandler = async (event) => {
   if (event.httpMethod !== "GET") {
     throw new Error(`getAllItems only accept GET method, you tried: ${event.httpMethod}`);
   }
-  try {
-    // goes through security checks
-    const errors = await checkRequirements(event);
-    if (errors) {
-      return errors;
-    }
-  } catch (err) {
-    return {
-      statusCode: 500,
-      body: "Internal Server Error",
-    };
-  }
 
   // get all items from the table (only first 1MB data, you can use `LastEvaluatedKey` to get the rest of data)
   // https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/DynamoDB/DocumentClient.html#scan-property

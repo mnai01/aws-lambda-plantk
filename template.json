@@ -3,6 +3,26 @@
   "Description": "plantk",
   "Transform": ["AWS::Serverless-2016-10-31"],
   "Resources": {
+    "RapidApiGateway": {
+      "Type": "AWS::Serverless::Api",
+      "Properties": {
+        "StageName": { "Ref": "AWS::StackName" },
+        "MethodSettings": [
+          { "HttpMethod": "*", "ResourcePath": "/*", "ThrottlingRateLimit": 10, "ThrottlingBurstLimit": 10 }
+        ],
+        "Auth": {
+          "DefaultAuthorizer": "RapidAuthorizer",
+          "Authorizers": {
+            "RapidAuthorizer": {
+              "Fn::GetAtt": ["RapidAuthFunction", "attributeName"],
+              "Identity": {
+                "Headers": ["X-RapidAPI-Proxy-Secret"]
+              }
+            }
+          }
+        }
+      }
+    },
     "getAllItemsFunction": {
       "Type": "AWS::Serverless::Function",
       "Properties": {
@@ -39,6 +59,7 @@
           "Api": {
             "Type": "Api",
             "Properties": {
+              "RestApiId": { "Ref": "RapidApiGateway" },
               "Path": "/",
               "Method": "GET"
             }
@@ -82,6 +103,7 @@
           "Api": {
             "Type": "Api",
             "Properties": {
+              "RestApiId": { "Ref": "RapidApiGateway" },
               "Path": "/{id}",
               "Method": "GET"
             }
@@ -125,6 +147,7 @@
           "Api": {
             "Type": "Api",
             "Properties": {
+              "RestApiId": { "Ref": "RapidApiGateway" },
               "Path": "/",
               "Method": "POST"
             }
@@ -150,6 +173,14 @@
       "Properties": {
         "Description": "Secret key from rapidAPI that keeps API secure from outside calls",
         "SecretString": "{\"secret\": \"\"}"
+      }
+    },
+    "RapidAuthFunction": {
+      "Type": "AWS::Serverless::Function",
+      "Properties": {
+        "CodeUri": "./authorizer",
+        "Handler": "handler.authorizer",
+        "Runtime": "nodejs14.x"
       }
     }
   },
