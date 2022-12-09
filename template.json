@@ -14,7 +14,7 @@
           "DefaultAuthorizer": "RapidAuthorizer",
           "Authorizers": {
             "RapidAuthorizer": {
-              "FunctionArn": { "Fn::GetAtt": ["RapidAuthFunction", "attributeName"] },
+              "FunctionArn": { "Fn::GetAtt": ["RapidAuthFunction", "Arn"] },
               "Identity": {
                 "Headers": ["X-RapidAPI-Proxy-Secret"]
               }
