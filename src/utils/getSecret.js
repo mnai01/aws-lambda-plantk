@@ -9,7 +9,7 @@ async function getSecret() {
     return secret;
   }
 
-  const { SecretString } = await client.getSecretValue({ SecretId: "RapidSecretkey-FPOK8v2fSzts" }).promise();
+  const { SecretString } = await client.getSecretValue({ SecretId: "RapidSecretkey-xJVhDdanqHdU" }).promise();
   console.info("*** SECRET WAS FETCHED FROM SECRETS MANAGER");
 
   return JSON.parse(SecretString).secret;
