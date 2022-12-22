@@ -12,8 +12,9 @@ on:
 env:
   PIPELINE_USER_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
   PIPELINE_USER_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+  RAPID_TOKEN: ${{ secrets.RAPID_TOKEN }}
   SAM_TEMPLATE: template.json
-  TESTING_STACK_NAME: sam-pipelines-dev
+  TESTING_STACK_NAME: house-plants-dev
   TESTING_PIPELINE_EXECUTION_ROLE: arn:aws:iam::067599918611:role/aws-sam-cli-managed-dev-pipe-PipelineExecutionRole-1HL9HYQL1TC1C
   TESTING_CLOUDFORMATION_EXECUTION_ROLE: arn:aws:iam::067599918611:role/aws-sam-cli-managed-dev-p-CloudFormationExecutionR-13SU3W2QY6A3E
   TESTING_ARTIFACTS_BUCKET: aws-sam-cli-managed-dev-pipeline-artifactsbucket-zufz0m8ce1ts
@@ -22,7 +23,7 @@ env:
   # testing "sam package" and "sam deploy" commands.
   # TESTING_IMAGE_REPOSITORY = '0123456789.dkr.ecr.region.amazonaws.com/repository-name'
   TESTING_REGION: us-east-2
-  PROD_STACK_NAME: sam-pipelines-prod
+  PROD_STACK_NAME: house-plants-prod
   PROD_PIPELINE_EXECUTION_ROLE: arn:aws:iam::067599918611:role/aws-sam-cli-managed-prod-pip-PipelineExecutionRole-1KXR7H535G5O1
   PROD_CLOUDFORMATION_EXECUTION_ROLE: arn:aws:iam::067599918611:role/aws-sam-cli-managed-prod-CloudFormationExecutionR-1GB8V446ZZPLA
   PROD_ARTIFACTS_BUCKET: aws-sam-cli-managed-prod-pipeline-artifactsbucket-iaht6nkt20f3
@@ -100,7 +101,8 @@ jobs:
             --region ${TESTING_REGION} \
             --s3-bucket ${TESTING_ARTIFACTS_BUCKET} \
             --no-fail-on-empty-changeset \
-            --role-arn ${TESTING_CLOUDFORMATION_EXECUTION_ROLE}
+            --role-arn ${TESTING_CLOUDFORMATION_EXECUTION_ROLE} \
+            --parameter-overrides RapidParam=${RAPID_TOKEN}
 
   build-and-package:
     if: github.ref == 'refs/heads/main'
@@ -191,7 +193,8 @@ jobs:
             --region ${TESTING_REGION} \
             --s3-bucket ${TESTING_ARTIFACTS_BUCKET} \
             --no-fail-on-empty-changeset \
-            --role-arn ${TESTING_CLOUDFORMATION_EXECUTION_ROLE}
+            --role-arn ${TESTING_CLOUDFORMATION_EXECUTION_ROLE} \
+            --parameter-overrides RapidParam=${RAPID_TOKEN}
 
   integration-test:
     if: github.ref == 'refs/heads/main'
@@ -236,4 +239,5 @@ jobs:
             --region ${PROD_REGION} \
             --s3-bucket ${PROD_ARTIFACTS_BUCKET} \
             --no-fail-on-empty-changeset \
-            --role-arn ${PROD_CLOUDFORMATION_EXECUTION_ROLE}
+            --role-arn ${PROD_CLOUDFORMATION_EXECUTION_ROLE} \
+            --parameter-overrides RapidParam=${RAPID_TOKEN}

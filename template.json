@@ -2,7 +2,34 @@
   "AWSTemplateFormatVersion": "2010-09-09",
   "Description": "plantk",
   "Transform": ["AWS::Serverless-2016-10-31"],
+  "Parameters": {
+    "RapidParam": {
+      "Type": "String",
+      "Description": "RapidAPI key"
+    }
+  },
   "Resources": {
+    "RapidApiGateway": {
+      "Type": "AWS::Serverless::Api",
+      "Properties": {
+        "StageName": { "Ref": "AWS::StackName" },
+        "MethodSettings": [
+          { "HttpMethod": "*", "ResourcePath": "/*", "ThrottlingRateLimit": 10, "ThrottlingBurstLimit": 10 }
+        ],
+        "Auth": {
+          "DefaultAuthorizer": "RapidAuthorizer",
+          "Authorizers": {
+            "RapidAuthorizer": {
+              "FunctionArn": { "Fn::GetAtt": ["RapidAuthFunction", "Arn"] },
+              "FunctionPayloadType": "REQUEST",
+              "Identity": {
+                "Headers": ["X-RapidAPI-Proxy-Secret"]
+              }
+            }
+          }
+        }
+      }
+    },
     "getAllItemsFunction": {
       "Type": "AWS::Serverless::Function",
       "Properties": {
@@ -39,6 +66,7 @@
           "Api": {
             "Type": "Api",
             "Properties": {
+              "RestApiId": { "Ref": "RapidApiGateway" },
               "Path": "/",
               "Method": "GET"
             }
@@ -82,51 +110,9 @@
           "Api": {
             "Type": "Api",
             "Properties": {
+              "RestApiId": { "Ref": "RapidApiGateway" },
               "Path": "/{id}",
               "Method": "GET"
-            }
-          }
-        }
-      }
-    },
-    "putItemFunction": {
-      "Type": "AWS::Serverless::Function",
-      "Properties": {
-        "Handler": "src/handlers/put-item.putItemHandler",
-        "Runtime": "nodejs14.x",
-        "Architectures": ["x86_64"],
-        "MemorySize": 128,
-        "Timeout": 100,
-        "Description": "A simple example includes a HTTP post method to add one item to a DynamoDB table.",
-        "Policies": [
-          {
-            "DynamoDBCrudPolicy": {
-              "TableName": {
-                "Ref": "HousePlantsTable"
-              }
-            }
-          },
-          {
-            "AWSSecretsManagerGetSecretValuePolicy": {
-              "SecretArn": {
-                "Ref": "RapidSecretkey"
-              }
-            }
-          }
-        ],
-        "Environment": {
-          "Variables": {
-            "HOUSE_PLANTS_TABLE": {
-              "Ref": "HousePlantsTable"
-            }
-          }
-        },
-        "Events": {
-          "Api": {
-            "Type": "Api",
-            "Properties": {
-              "Path": "/",
-              "Method": "POST"
             }
           }
         }
@@ -149,7 +135,32 @@
       "Type": "AWS::SecretsManager::Secret",
       "Properties": {
         "Description": "Secret key from rapidAPI that keeps API secure from outside calls",
-        "SecretString": "{\"secret\": \"\"}"
+        "SecretString": { "Fn::Sub": "{\"secret\": \"${RapidParam}\"}" }
+      }
+    },
+    "RapidAuthFunction": {
+      "Type": "AWS::Serverless::Function",
+      "Properties": {
+        "Handler": "src/authorizer/handler.authorizer",
+        "Runtime": "nodejs14.x",
+        "Architectures": ["x86_64"],
+        "MemorySize": 128,
+        "Timeout": 100,
+        "Description": "Authenticator for API gateway, this gets ran before ever API call",
+        "Policies": [
+          {
+            "AWSSecretsManagerGetSecretValuePolicy": {
+              "SecretArn": {
+                "Ref": "RapidSecretkey"
+              }
+            }
+          }
+        ],
+        "Environment": {
+          "Variables": {
+            "RAPID_SECRET_ID": { "Ref": "RapidSecretkey" }
+          }
+        }
       }
     }
   },
@@ -157,7 +168,7 @@
     "WebEndpoint": {
       "Description": "API Gateway endpoint URL for Prod stage",
       "Value": {
-        "Fn::Sub": "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/"
+        "Fn::Sub": "https://${RapidApiGateway}.execute-api.${AWS::Region}.amazonaws.com/Prod/"
       }
     }
   }
