@@ -2,6 +2,10 @@
   "AWSTemplateFormatVersion": "2010-09-09",
   "Description": "plantk",
   "Transform": ["AWS::Serverless-2016-10-31"],
+  "RapidParam": {
+    "Type": "String",
+    "Description": "RapidAPI key"
+  },
   "Resources": {
     "RapidApiGateway": {
       "Type": "AWS::Serverless::Api",
@@ -15,6 +19,7 @@
           "Authorizers": {
             "RapidAuthorizer": {
               "FunctionArn": { "Fn::GetAtt": ["RapidAuthFunction", "Arn"] },
+              "FunctionPayloadType": "REQUEST",
               "Identity": {
                 "Headers": ["X-RapidAPI-Proxy-Secret"]
               }
@@ -128,18 +133,32 @@
       "Type": "AWS::SecretsManager::Secret",
       "Properties": {
         "Description": "Secret key from rapidAPI that keeps API secure from outside calls",
-        "SecretString": "{\"secret\": \"\"}"
+        "SecretString": { "Fn::Sub": "{\"secret\": \"${RapidParam}\"}" }
       }
     },
     "RapidAuthFunction": {
       "Type": "AWS::Serverless::Function",
       "Properties": {
-        "Handler": "src/handlers/handler.authorizer",
+        "Handler": "src/authorizer/handler.authorizer",
         "Runtime": "nodejs14.x",
         "Architectures": ["x86_64"],
         "MemorySize": 128,
         "Timeout": 100,
-        "Description": "Authenticator for API gateway, this gets ran before ever API call"
+        "Description": "Authenticator for API gateway, this gets ran before ever API call",
+        "Policies": [
+          {
+            "AWSSecretsManagerGetSecretValuePolicy": {
+              "SecretArn": {
+                "Ref": "RapidSecretkey"
+              }
+            }
+          }
+        ],
+        "Environment": {
+          "Variables": {
+            "RAPID_SECRET_ID": { "Ref": "RapidSecretkey" }
+          }
+        }
       }
     }
   },
