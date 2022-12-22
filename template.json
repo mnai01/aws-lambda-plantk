@@ -2,9 +2,11 @@
   "AWSTemplateFormatVersion": "2010-09-09",
   "Description": "plantk",
   "Transform": ["AWS::Serverless-2016-10-31"],
-  "RapidParam": {
-    "Type": "String",
-    "Description": "RapidAPI key"
+  "Parameters": {
+    "RapidParam": {
+      "Type": "String",
+      "Description": "RapidAPI key"
+    }
   },
   "Resources": {
     "RapidApiGateway": {
