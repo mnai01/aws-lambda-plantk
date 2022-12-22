@@ -12,7 +12,7 @@ on:
 env:
   PIPELINE_USER_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
   PIPELINE_USER_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-  RAPID_TOKEN: ${{secrets.RAPID_TOKEN}}
+  RAPID_TOKEN: ${{ secrets.RAPID_TOKEN }}
   SAM_TEMPLATE: template.json
   TESTING_STACK_NAME: house-plants-dev
   TESTING_PIPELINE_EXECUTION_ROLE: arn:aws:iam::067599918611:role/aws-sam-cli-managed-dev-pipe-PipelineExecutionRole-1HL9HYQL1TC1C
@@ -102,7 +102,7 @@ jobs:
             --s3-bucket ${TESTING_ARTIFACTS_BUCKET} \
             --no-fail-on-empty-changeset \
             --role-arn ${TESTING_CLOUDFORMATION_EXECUTION_ROLE}
-            --parameter-overrides RapidParam=${RAPID_TOKEN}
+            --parameter-overrides \ RapidParam=${RAPID_TOKEN}
 
   build-and-package:
     if: github.ref == 'refs/heads/main'
@@ -194,7 +194,7 @@ jobs:
             --s3-bucket ${TESTING_ARTIFACTS_BUCKET} \
             --no-fail-on-empty-changeset \
             --role-arn ${TESTING_CLOUDFORMATION_EXECUTION_ROLE}
-            --parameter-overrides RapidParam=${RAPID_TOKEN}
+            --parameter-overrides \ RapidParam=${RAPID_TOKEN}
 
   integration-test:
     if: github.ref == 'refs/heads/main'
@@ -240,4 +240,4 @@ jobs:
             --s3-bucket ${PROD_ARTIFACTS_BUCKET} \
             --no-fail-on-empty-changeset \
             --role-arn ${PROD_CLOUDFORMATION_EXECUTION_ROLE}
-            --parameter-overrides RapidParam=${RAPID_TOKEN}
+            --parameter-overrides \ RapidParam=${RAPID_TOKEN}
