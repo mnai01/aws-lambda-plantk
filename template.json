@@ -51,7 +51,7 @@
           {
             "AWSSecretsManagerGetSecretValuePolicy": {
               "SecretArn": {
-                "Ref": "RapidSecretkey"
+                "Ref": "HousePlantRapidSecretkey"
               }
             }
           }
@@ -95,7 +95,7 @@
           {
             "AWSSecretsManagerGetSecretValuePolicy": {
               "SecretArn": {
-                "Ref": "RapidSecretkey"
+                "Ref": "HousePlantRapidSecretkey"
               }
             }
           }
@@ -132,7 +132,7 @@
         }
       }
     },
-    "RapidSecretkey": {
+    "HousePlantRapidSecretkey": {
       "Type": "AWS::SecretsManager::Secret",
       "Properties": {
         "Description": "Secret key from rapidAPI that keeps API secure from outside calls",
@@ -152,14 +152,14 @@
           {
             "AWSSecretsManagerGetSecretValuePolicy": {
               "SecretArn": {
-                "Ref": "RapidSecretkey"
+                "Ref": "HousePlantRapidSecretkey"
               }
             }
           }
         ],
         "Environment": {
           "Variables": {
-            "RAPID_SECRET_ID": { "Ref": "RapidSecretkey" }
+            "RAPID_SECRET_ID": { "Ref": "HousePlantRapidSecretkey" }
           }
         }
       }
