@@ -9,6 +9,8 @@ const tableName = process.env.HOUSE_PLANTS_TABLE;
  * A simple example includes a HTTP get method to get all items from a DynamoDB table.
  */
 exports.getAllItemsHandler = async (event) => {
+  console.info("received:", event);
+
   if (event.httpMethod !== "GET") {
     throw new Error(`getAllItems only accept GET method, you tried: ${event.httpMethod}`);
   }
@@ -47,6 +49,6 @@ exports.getAllItemsHandler = async (event) => {
   }
 
   // All log statements are written to CloudWatch
-  console.info(`response from: ${event.path} statusCode: ${response.statusCode} body: ${response.body}`);
+  console.info(`response from: ${event.path} statusCode: ${response.statusCode}`);
   return response;
 };
