@@ -2,7 +2,7 @@
 
 // Create a DocumentClient that represents the query to add an item
 const AWS = require("aws-sdk");
-const { checkRequirements } = require("../helper/checkRequirements");
+
 // Get the DynamoDB table name from environment variables
 const tableName = process.env.HOUSE_PLANTS_TABLE;
 

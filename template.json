@@ -47,13 +47,6 @@
                 "Ref": "HousePlantsTable"
               }
             }
-          },
-          {
-            "AWSSecretsManagerGetSecretValuePolicy": {
-              "SecretArn": {
-                "Ref": "HousePlantRapidSecretkey"
-              }
-            }
           }
         ],
         "Environment": {
@@ -89,13 +82,6 @@
             "DynamoDBCrudPolicy": {
               "TableName": {
                 "Ref": "HousePlantsTable"
-              }
-            }
-          },
-          {
-            "AWSSecretsManagerGetSecretValuePolicy": {
-              "SecretArn": {
-                "Ref": "HousePlantRapidSecretkey"
               }
             }
           }
