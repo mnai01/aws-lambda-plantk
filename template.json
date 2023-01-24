@@ -61,7 +61,7 @@
             "Type": "Api",
             "Properties": {
               "RestApiId": { "Ref": "RapidApiGateway" },
-              "Path": "/",
+              "Path": "/all",
               "Method": "GET"
             }
           }
@@ -98,7 +98,81 @@
             "Type": "Api",
             "Properties": {
               "RestApiId": { "Ref": "RapidApiGateway" },
-              "Path": "/{id}",
+              "Path": "/id/{id}",
+              "Method": "GET"
+            }
+          }
+        }
+      }
+    },
+    "getByCategoryFunction": {
+      "Type": "AWS::Serverless::Function",
+      "Properties": {
+        "Handler": "src/handlers/get-by-category.getByCategoryHandler",
+        "Runtime": "nodejs14.x",
+        "Architectures": ["x86_64"],
+        "MemorySize": 128,
+        "Timeout": 100,
+        "Description": "A simple example includes a HTTP get method to get one item by id from a DynamoDB table.",
+        "Policies": [
+          {
+            "DynamoDBCrudPolicy": {
+              "TableName": {
+                "Ref": "HousePlantsTable"
+              }
+            }
+          }
+        ],
+        "Environment": {
+          "Variables": {
+            "HOUSE_PLANTS_TABLE": {
+              "Ref": "HousePlantsTable"
+            }
+          }
+        },
+        "Events": {
+          "Api": {
+            "Type": "Api",
+            "Properties": {
+              "RestApiId": { "Ref": "RapidApiGateway" },
+              "Path": "/category/{category}",
+              "Method": "GET"
+            }
+          }
+        }
+      }
+    },
+    "getAllCategoriesFunction": {
+      "Type": "AWS::Serverless::Function",
+      "Properties": {
+        "Handler": "src/handlers/get-all-categories.getAllCategoriesHandler",
+        "Runtime": "nodejs14.x",
+        "Architectures": ["x86_64"],
+        "MemorySize": 128,
+        "Timeout": 100,
+        "Description": "A simple example includes a HTTP get method to get one item by id from a DynamoDB table.",
+        "Policies": [
+          {
+            "DynamoDBCrudPolicy": {
+              "TableName": {
+                "Ref": "HousePlantsTable"
+              }
+            }
+          }
+        ],
+        "Environment": {
+          "Variables": {
+            "HOUSE_PLANTS_TABLE": {
+              "Ref": "HousePlantsTable"
+            }
+          }
+        },
+        "Events": {
+          "Api": {
+            "Type": "Api",
+            "Properties": {
+              "RestApiId": { "Ref": "RapidApiGateway" },
+              "Path": "/categories",
               "Method": "GET"
             }
           }
