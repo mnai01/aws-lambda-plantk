@@ -14,7 +14,7 @@ exports.getByCategoryHandler = async (event) => {
     throw new Error(`getAllItems only accept GET method, you tried: ${event.httpMethod}`);
   }
 
-  const category = event.pathParameters.category;
+  const category = event.pathParameters.category.replace("%20", " ");
 
   // get all items from the table (only first 1MB data, you can use `LastEvaluatedKey` to get the rest of data)
   // https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/DynamoDB/DocumentClient.html#scan-property
