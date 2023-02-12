@@ -1,6 +1,6 @@
 // Create clients and set shared const values outside of the handler.
 const AWS = require("aws-sdk");
-const Fuse = require("fuse.js");
+const Fuse = require("/opt/nodejs/node_modules/dist/fuse.js");
 
 // Get the DynamoDB table name from environment variables
 const tableName = process.env.HOUSE_PLANTS_TABLE;
