@@ -105,11 +105,11 @@
         }
       }
     },
-    "postAllSearchedItemsFunction": {
+    "getAllSearchedItemsFunction": {
       "Type": "AWS::Serverless::Function",
       "Properties": {
         "Layers": [{ "Ref": "NodeModulesLayer" }],
-        "Handler": "src/handlers/post-all-searched-items.postAllSearchedItemsHandler",
+        "Handler": "src/handlers/get-all-searched-items.getAllSearchedItemsHandler",
         "Runtime": "nodejs14.x",
         "Architectures": ["x86_64"],
         "MemorySize": 128,
@@ -137,7 +137,7 @@
             "Properties": {
               "RestApiId": { "Ref": "RapidApiGateway" },
               "Path": "/search",
-              "Method": "POST"
+              "Method": "GET"
             }
           }
         }
