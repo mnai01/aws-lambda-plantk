@@ -1,6 +1,6 @@
 // Create clients and set shared const values outside of the handler.
 const AWS = require("aws-sdk");
-// const Fuse = require("/opt/nodejs/node_modules/dist/fuse.js");
+const Fuse = require("/opt/nodejs/node_modules/fuse.js/dist/fuse.js");
 
 // Get the DynamoDB table name from environment variables
 const tableName = process.env.HOUSE_PLANTS_TABLE;
@@ -48,30 +48,30 @@ exports.getAllSearchedItemsHandler = async (event) => {
     const data = await docClient.scan(params).promise();
     const items = data.Items;
 
-    // console.info(items);
+    console.info(items);
 
-    // const options = {
-    //   includeScore: false,
-    //   keys: [
-    //     "Latin name",
-    //     "Family",
-    //     "Other names",
-    //     "Common name",
-    //     "Common name (fr.)",
-    //     "Description",
-    //     "Categories",
-    //     "Origin",
-    //   ],
-    // };
+    const options = {
+      includeScore: false,
+      keys: [
+        "Latin name",
+        "Family",
+        "Other names",
+        "Common name",
+        "Common name (fr.)",
+        "Description",
+        "Categories",
+        "Origin",
+      ],
+    };
 
-    // const fuse = new Fuse(items, options);
-    // const result = fuse.search(query);
+    const fuse = new Fuse(items, options);
+    const result = fuse.search(query);
 
-    // console.log(result);
+    console.log(result);
 
     response = {
       statusCode: 200,
-      body: JSON.stringify(items),
+      body: JSON.stringify(result),
     };
   } catch (ResourceNotFoundException) {
     console.info({ ResourceNotFoundException });
