@@ -31,10 +31,11 @@ exports.authorizer = async (event) => {
   if (
     isValidIP(event) &&
     headers[RAPID_SECRET_TOKEN_KEY] &&
-    process.env.STORED_SECRET === headers[RAPID_SECRET_TOKEN_KEY]
+    process.env.STORED_PARAM === headers[RAPID_SECRET_TOKEN_KEY]
   ) {
     return generateAllow("user", resource);
   } else {
+    console.info("ERROR:", { IN_HEADERS: headers[RAPID_SECRET_TOKEN_KEY], STORED_LOCALLY: process.env.STORED_PARAM });
     throw new Error("Unauthorized");
   }
 };
