@@ -277,7 +277,7 @@
         }
       }
     },
-    "HousePlantRapidSecretkey": {
+    "HousePlantRapidSecretParam": {
       "Type": "AWS::SSM::Parameter",
       "Properties": {
         "Name": {
@@ -306,18 +306,9 @@
         "MemorySize": 128,
         "Timeout": 100,
         "Description": "Authenticator for API gateway, this gets ran before ever API call",
-        "Policies": [
-          {
-            "AWSSecretsManagerGetSecretValuePolicy": {
-              "SecretArn": {
-                "Ref": "HousePlantRapidSecretkey"
-              }
-            }
-          }
-        ],
         "Environment": {
           "Variables": {
-            "RAPID_SECRET_ID": { "Ref": "HousePlantRapidSecretkey" }
+            "RAPID_PARAM_ID": { "Ref": "HousePlantRapidSecretParam" }
           }
         }
       }
