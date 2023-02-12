@@ -1,26 +1,32 @@
 const AWS = require("aws-sdk");
-const client = new AWS.SecretsManager({ region: process.env.AWS_REGION });
+const ssm = new AWS.SSM();
 
 async function getSecret() {
-  const secret = process.env["STORED_SECRET"];
+  const param = process.env["STORED_PARAM"];
 
-  if (secret) {
-    console.info("*** SECRET WAS IN THE CACHE");
-    return secret;
+  if (param) {
+    console.info("*** PARAM WAS IN THE CACHE");
+    return param;
   }
 
   try {
-    const { SecretString } = await client.getSecretValue({ SecretId: process.env.RAPID_SECRET_ID }).promise();
-    console.info("*** SECRET WAS FETCHED FROM SECRETS MANAGER");
-    return JSON.parse(SecretString).secret;
+    const result = await ssm
+      .getParameter({
+        Name: process.env.RAPID_PARAM_ID,
+        WithDecryption: true,
+      })
+      .promise();
+
+    console.info("*** SECRET WAS FETCHED FROM PARAMETER STORE");
+    return result.Parameter.Value;
   } catch (err) {
-    console.info(err, "SECRET GET_SECRET_VALUE FAILED");
+    console.info(err, "SECRET GET PARAMETER FAILED");
   }
 }
 
 async function initSecret() {
-  const secret = await getSecret();
-  process.env.STORED_SECRET = secret;
+  const param = await getSecret();
+  process.env.STORED_PARAM = param;
 }
 
 module.exports = { initSecret };

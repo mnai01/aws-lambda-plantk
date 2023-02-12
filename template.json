@@ -68,6 +68,81 @@
         }
       }
     },
+    "getAllItemsLiteFunction": {
+      "Type": "AWS::Serverless::Function",
+      "Properties": {
+        "Handler": "src/handlers/get-all-items-lite.getAllItemsLiteHandler",
+        "Runtime": "nodejs14.x",
+        "Architectures": ["x86_64"],
+        "MemorySize": 128,
+        "Timeout": 100,
+        "Description": "A simple example includes a HTTP get method to get all items from a DynamoDB table.",
+        "Policies": [
+          {
+            "DynamoDBCrudPolicy": {
+              "TableName": {
+                "Ref": "HousePlantsTable"
+              }
+            }
+          }
+        ],
+        "Environment": {
+          "Variables": {
+            "HOUSE_PLANTS_TABLE": {
+              "Ref": "HousePlantsTable"
+            }
+          }
+        },
+        "Events": {
+          "Api": {
+            "Type": "Api",
+            "Properties": {
+              "RestApiId": { "Ref": "RapidApiGateway" },
+              "Path": "/all-lite",
+              "Method": "GET"
+            }
+          }
+        }
+      }
+    },
+    "getAllSearchedItemsFunction": {
+      "Type": "AWS::Serverless::Function",
+      "Properties": {
+        "Layers": [{ "Ref": "NodeModulesLayer" }],
+        "Handler": "src/handlers/get-all-searched-items.getAllSearchedItemsHandler",
+        "Runtime": "nodejs14.x",
+        "Architectures": ["x86_64"],
+        "MemorySize": 128,
+        "Timeout": 100,
+        "Description": "A simple example includes a HTTP post method to get all items from a DynamoDB table.",
+        "Policies": [
+          {
+            "DynamoDBCrudPolicy": {
+              "TableName": {
+                "Ref": "HousePlantsTable"
+              }
+            }
+          }
+        ],
+        "Environment": {
+          "Variables": {
+            "HOUSE_PLANTS_TABLE": {
+              "Ref": "HousePlantsTable"
+            }
+          }
+        },
+        "Events": {
+          "Api": {
+            "Type": "Api",
+            "Properties": {
+              "RestApiId": { "Ref": "RapidApiGateway" },
+              "Path": "/search",
+              "Method": "GET"
+            }
+          }
+        }
+      }
+    },
     "getByIdFunction": {
       "Type": "AWS::Serverless::Function",
       "Properties": {
@@ -179,6 +254,16 @@
         }
       }
     },
+    "NodeModulesLayer": {
+      "Type": "AWS::Serverless::LayerVersion",
+      "Properties": {
+        "LayerName": "house-plant-layers",
+        "Description": "Layer that will be shared across multiple microservices",
+        "LicenseInfo": "Available under the MIT license.",
+        "ContentUri": "./layers",
+        "CompatibleRuntimes": ["nodejs14.x"]
+      }
+    },
     "HousePlantsTable": {
       "Type": "AWS::Serverless::SimpleTable",
       "Properties": {
@@ -192,36 +277,74 @@
         }
       }
     },
-    "HousePlantRapidSecretkey": {
-      "Type": "AWS::SecretsManager::Secret",
+    "HousePlantRapidSecretParam": {
+      "Type": "AWS::SSM::Parameter",
       "Properties": {
-        "Description": "Secret key from rapidAPI that keeps API secure from outside calls",
-        "SecretString": { "Fn::Sub": "{\"secret\": \"${RapidParam}\"}" }
+        "Name": {
+          "Fn::Join": [
+            "-",
+            [
+              {
+                "Ref": "AWS::StackName"
+              },
+              "param"
+            ]
+          ]
+        },
+        "Description": "Parameter from AWS Parameter Store that keeps API secure from outside calls",
+        "Type": "String",
+        "Value": { "Ref": "RapidParam" }
       }
     },
     "RapidAuthFunction": {
       "Type": "AWS::Serverless::Function",
       "Properties": {
+        "Role": { "Fn::GetAtt": ["HousePlantParameterStoreIAMRole", "Arn"] },
         "Handler": "src/authorizer/handler.authorizer",
         "Runtime": "nodejs14.x",
         "Architectures": ["x86_64"],
         "MemorySize": 128,
         "Timeout": 100,
         "Description": "Authenticator for API gateway, this gets ran before ever API call",
-        "Policies": [
-          {
-            "AWSSecretsManagerGetSecretValuePolicy": {
-              "SecretArn": {
-                "Ref": "HousePlantRapidSecretkey"
-              }
-            }
-          }
-        ],
         "Environment": {
           "Variables": {
-            "RAPID_SECRET_ID": { "Ref": "HousePlantRapidSecretkey" }
+            "RAPID_PARAM_ID": { "Ref": "HousePlantRapidSecretParam" }
           }
         }
+      }
+    },
+    "HousePlantParameterStoreIAMRole": {
+      "Type": "AWS::IAM::Role",
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "lambda.amazonaws.com"
+              }
+            }
+          ]
+        },
+        "Path": "/",
+        "ManagedPolicyArns": ["arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"],
+        "Policies": [
+          {
+            "PolicyName": "SSMGetParameter",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Action": "ssm:GetParameter",
+                  "Effect": "Allow",
+                  "Resource": "*"
+                }
+              ]
+            }
+          }
+        ]
       }
     }
   },
