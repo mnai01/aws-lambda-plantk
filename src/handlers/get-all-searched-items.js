@@ -11,6 +11,8 @@ const tableName = process.env.HOUSE_PLANTS_TABLE;
 exports.getAllSearchedItemsHandler = async (event) => {
   console.info("received:", event);
 
+  console.info(process.env.NODE_PATH);
+
   if (event.httpMethod !== "POST") {
     throw new Error(`getAllItems only accept POST method, you tried: ${event.httpMethod}`);
   }
