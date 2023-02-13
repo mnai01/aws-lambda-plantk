@@ -1,6 +1,6 @@
 // Create clients and set shared const values outside of the handler.
 const AWS = require("aws-sdk");
-const Fuse = require("/opt/nodejs/node_modules/fuse.js/dist/fuse.js");
+const Fuse = require("/opt/nodejs/node_modules/fuse.js/dist/fuse");
 
 // Get the DynamoDB table name from environment variables
 const tableName = process.env.HOUSE_PLANTS_TABLE;
@@ -13,7 +13,7 @@ exports.getAllSearchedItemsHandler = async (event) => {
 
   console.info(process.env.NODE_PATH);
 
-  if (event.httpMethod !== "POST") {
+  if (event.httpMethod !== "GET") {
     throw new Error(`getAllItems only accept POST method, you tried: ${event.httpMethod}`);
   }
 
