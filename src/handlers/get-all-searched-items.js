@@ -52,6 +52,7 @@ exports.getAllSearchedItemsHandler = async (event) => {
 
     const options = {
       includeScore: false,
+      threshold: 0.3,
       keys: [
         "Latin name",
         "Family",
