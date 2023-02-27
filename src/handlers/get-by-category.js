@@ -16,6 +16,8 @@ exports.getByCategoryHandler = async (event) => {
 
   let category = event.pathParameters.category.replace("/%20/g", " ").replace("%26", "&");
 
+  console.info("Search Category by: " + category);
+
   // get all items from the table (only first 1MB data, you can use `LastEvaluatedKey` to get the rest of data)
   // https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/DynamoDB/DocumentClient.html#scan-property
   // https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_Scan.html
@@ -67,9 +69,12 @@ exports.getByCategoryHandler = async (event) => {
     const data = await docClient.scan(params).promise();
     let items = data.Items;
 
+    console.info({ DYNAMODB_RESULTS: data.Items });
+
     let res = [];
 
     items.forEach((item) => {
+      console.log(`Category: ${category}, Item Categories: ${item.Categories}`);
       if (item.Categories === category) {
         res.push(item);
       }
