@@ -14,7 +14,7 @@ exports.getByCategoryHandler = async (event) => {
     throw new Error(`getAllItems only accept GET method, you tried: ${event.httpMethod}`);
   }
 
-  const category = event.pathParameters.category.replace("%20", " ");
+  let category = event.pathParameters.category.replace("%20", " ").replace("%26", "&");
 
   // get all items from the table (only first 1MB data, you can use `LastEvaluatedKey` to get the rest of data)
   // https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/DynamoDB/DocumentClient.html#scan-property
@@ -33,6 +33,32 @@ exports.getByCategoryHandler = async (event) => {
   try {
     const params = {
       TableName: tableName,
+      ProjectionExpression: [
+        "Img",
+        "id",
+        "#Family",
+        "#Latin_name",
+        "#Other_names",
+        "#Common_name",
+        "#Common_name_",
+        "#Description",
+        "#Categories",
+        "#Origin",
+        "#Climat",
+        "#Zone",
+      ],
+      ExpressionAttributeNames: {
+        "#Family": "Family",
+        "#Latin_name": "Latin name",
+        "#Other_names": "Other names",
+        "#Common_name": "Common name",
+        "#Common_name_": "Common name (fr.)",
+        "#Description": "Description",
+        "#Categories": "Categories",
+        "#Origin": "Origin",
+        "#Climat": "Climat",
+        "#Zone": "Zone",
+      },
       FilterExpression: "Categories = :Categories",
       ExpressionAttributeValues: {
         ":Categories": category,
