@@ -14,7 +14,7 @@ exports.getByCategoryHandler = async (event) => {
     throw new Error(`getAllItems only accept GET method, you tried: ${event.httpMethod}`);
   }
 
-  let category = event.pathParameters.category.replace("/%20/g", " ").replace("%26", "&");
+  let category = event.pathParameters.category.replace(/%20/g, " ").replace("%26", "&");
 
   console.info("Search Category by: " + category);
 
