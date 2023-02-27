@@ -69,12 +69,9 @@ exports.getByCategoryHandler = async (event) => {
     const data = await docClient.scan(params).promise();
     let items = data.Items;
 
-    console.info({ DYNAMODB_RESULTS: data.Items });
-
     let res = [];
 
     items.forEach((item) => {
-      console.log(`Category: ${category}, Item Categories: ${item.Categories}`);
       if (item.Categories === category) {
         res.push(item);
       }
