@@ -8,11 +8,11 @@ const tableName = process.env.HOUSE_PLANTS_TABLE;
  * A simple example includes a HTTP get method to get all items from a DynamoDB table.
  */
 exports.getByCategoryHandler = async (event) => {
-  console.info("received:", event);
-
   if (event.httpMethod !== "GET") {
     throw new Error(`getAllItems only accept GET method, you tried: ${event.httpMethod}`);
   }
+
+  console.info("received:", event);
 
   let category = event.pathParameters.category.replace(/%20/g, " ").replace("%26", "&");
 

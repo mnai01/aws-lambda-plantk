@@ -8,11 +8,11 @@ const tableName = process.env.HOUSE_PLANTS_TABLE;
  * A simple example includes a HTTP get method to get all items from a DynamoDB table.
  */
 exports.getAllCategoriesHandler = async (event) => {
-  console.info("received:", event);
-
   if (event.httpMethod !== "GET") {
     throw new Error(`getAllItems only accept GET method, you tried: ${event.httpMethod}`);
   }
+
+  console.info("received:", event);
 
   // get all items from the table (only first 1MB data, you can use `LastEvaluatedKey` to get the rest of data)
   // https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/DynamoDB/DocumentClient.html#scan-property

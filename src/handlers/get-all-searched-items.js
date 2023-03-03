@@ -9,9 +9,11 @@ const tableName = process.env.HOUSE_PLANTS_TABLE;
  * A simple example includes a HTTP get method to get all items from a DynamoDB table.
  */
 exports.getAllSearchedItemsHandler = async (event) => {
-  console.info("received:", event);
+  if (event.httpMethod !== "GET") {
+    throw new Error(`getAllSearchedItems only accept GET method, you tried: ${event.httpMethod}`);
+  }
 
-  console.info(process.env.NODE_PATH);
+  console.info("received:", event);
 
   if (event.httpMethod !== "GET") {
     throw new Error(`getAllItems only accept POST method, you tried: ${event.httpMethod}`);
